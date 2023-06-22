@@ -1,0 +1,43 @@
+-- The highest price product
+select product_name, max(price_usd*14000) as price
+from product_info_csv pic 
+
+-- The lowest price product
+select product_name, min(price_usd*14000) as price
+from product_info_csv pic 
+
+--  Show the total revenue of each category
+select primary_category, sum(loves_count*price_usd*14000) as total_revenue
+from product_info_csv pic 
+group by primary_category 
+order by total_revenue desc
+
+-- Show the top 5 brands with the highest revenue
+select brand_id, brand_name, sum(loves_count*price_usd*14000) as total_revenue
+from product_info_csv pic 
+group by brand_name
+order by total_revenue desc
+LIMIT 5
+
+-- Top 5 the best selling products
+select product_id, product_name, sum(loves_count) as total_sell
+from product_info_csv pic 
+group by product_name
+order by total_sell DESC 
+LIMIT 5
+
+-- Top 5 products where category = skincare and rating = 5
+select product_name, primary_category, sum(loves_count), rating
+from product_info_csv pic 
+WHERE primary_category = 'Skincare' and rating = 5
+group by product_name 
+order by loves_count desc
+LIMIT 5
+
+-- Top 5 products where rating less than 1
+select product_name,sum(loves_count), rating
+from product_info_csv pic 
+WHERE rating <=1
+group by product_name 
+order by loves_count DESC 
+LIMIT 5
