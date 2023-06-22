@@ -1,2 +1,2 @@
-👋 Hi, I’m @ElizaVeronica
+👋 Hi, I’m @ElizaVeronica,
 WELCOME TO MY SQL PORTOFOLIO
