@@ -36,18 +36,17 @@ group by product_name
 order by total_sell DESC 
 LIMIT 5
 
--- Top 5 products where category = skincare and rating = 5
-select product_name, primary_category, sum(loves_count), rating
+-- Find products that received a rating between 4 and 5 by skincare category
+select product_name, primary_category, rating
 from product_info_csv pic 
-WHERE primary_category = 'Skincare' and rating = 5
+WHERE rating BETWEEN 4 and 5
+and primary_category IN ('Skincare')
 group by product_name 
-order by loves_count desc
-LIMIT 5
+order by rating desc
 
--- Top 5 products where rating less than 1
-select product_name,sum(loves_count), rating
+-- Find the products that received a rating of 1
+select product_name, rating
 from product_info_csv pic 
-WHERE rating <=1
+WHERE rating IN (1)
 group by product_name 
 order by loves_count DESC 
-LIMIT 5
