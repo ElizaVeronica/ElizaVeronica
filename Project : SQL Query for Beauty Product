@@ -13,11 +13,21 @@ group by primary_category
 order by total_revenue desc
 
 -- Show the top 5 brands with the highest revenue
-select brand_id, brand_name, sum(loves_count*price_usd*14000) as total_revenue
+with ca as 
+(
+select brand_id, 
+brand_name, 
+sum(loves_count*price_usd*14000) as total_revenue,
+RANK() OVER (
+order by sum(loves_count*price_usd*14000) desc) as rnk
 from product_info_csv pic 
 group by brand_name
-order by total_revenue desc
-LIMIT 5
+)
+select brand_id,
+brand_name,
+total_revenue
+from ca
+where rnk <= 5
 
 -- Top 5 the best selling products
 select product_id, product_name, sum(loves_count) as total_sell
