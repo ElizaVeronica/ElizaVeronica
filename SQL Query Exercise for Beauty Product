@@ -1,3 +1,4 @@
+-- Dataset from Kaggle
 -- The highest price product
 select product_name, max(price_usd*14000) as price
 from product_info_csv pic 
