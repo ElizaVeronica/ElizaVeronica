@@ -1,0 +1,52 @@
+--Calculate the total of data stock
+select sum(availability) 
+from dataset d
+
+--Find product type which is SKU more than 30
+select product_type,
+COUNT(SKU)
+from Dataset d 
+group by Product_type 
+having count(SKU) > 30
+
+--Find the most selling SKU per each location
+SELECT sku,
+max(number_of_products_sold) as Product_sold,
+location
+from Dataset d 
+group by Location 
+order by product_sold desc
+
+--Find the order with the highest SKU
+select sku,
+max(order_quantities) as Total_order
+from Dataset d 
+order by Total_order desc
+
+--Calculate how many modes of transportation are used and the total cost per each mode of transportation
+select transportation_modes,
+COUNT(Transportation_modes),
+sum(costs)
+from Dataset d
+group by Transportation_modes 
+
+--Calculate the total of inspection of each type of product
+SELECT product_type,
+inspection_results,
+count(inspection_results)
+from Dataset d 
+group by Product_type 
+
+--Find stock of SKU that less than 10
+select sku,
+availability as Total_stock
+from dataset d
+WHERE Availability < 10
+
+--Find the total of each product type
+SELECT 
+sum(case when Product_type = 'skincare' then 1 else 0 end) as skincare,
+sum(case when Product_type = 'cosmetics' then 1 else 0 end) as cosmetics,
+sum(case when Product_type = 'haircare' then 1 else 0 end) as haircare
+from Dataset d 
+
