@@ -1,3 +1,4 @@
+--Dataset from kaggle
 --Calculate the total of data stock
 select sum(availability) 
 from dataset d
